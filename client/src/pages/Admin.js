@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
-import {Button, Container} from "react-bootstrap";
+import React, { useState } from 'react';
+import { Button, Container } from "react-bootstrap";
 import CreateBrand from "../components/modals/CreateBrand";
 import CreateDevice from "../components/modals/CreateDevice";
 import CreateType from "../components/modals/CreateType";
+import DeleteType from "../components/modals/DeleteType";
 
 const Admin = () => {
-    const [brandVisible, setBrandVisible] = useState(false)
     const [typeVisible, setTypeVisible] = useState(false)
+    const [deleteTypeVisible, setDeleteTypeVisible] = useState(false)
+    const [brandVisible, setBrandVisible] = useState(false)
     const [deviceVisible, setDeviceVisible] = useState(false)
 
     return (
@@ -14,9 +16,14 @@ const Admin = () => {
             <Button
                 variant={"outline-dark"}
                 className="mt-4 p-2"
-                onClick={() => setTypeVisible(true)}
-            >
+                onClick={() => setTypeVisible(true)}>
                 Добавить тип
+            </Button>
+            <Button
+                variant={"outline-dark"}
+                className="mt-4 p-2"
+                onClick={() => setDeleteTypeVisible(true)}>
+                Удалить тип
             </Button>
             <Button
                 variant={"outline-dark"}
@@ -32,9 +39,10 @@ const Admin = () => {
             >
                 Добавить устройство
             </Button>
-            <CreateBrand show={brandVisible} onHide={() => setBrandVisible(false)}/>
-            <CreateDevice show={deviceVisible} onHide={() => setDeviceVisible(false)}/>
-            <CreateType show={typeVisible} onHide={() => setTypeVisible(false)}/>
+            <CreateBrand show={brandVisible} onHide={() => setBrandVisible(false)} />
+            <CreateDevice show={deviceVisible} onHide={() => setDeviceVisible(false)} />
+            <CreateType show={typeVisible} onHide={() => setTypeVisible(false)} />
+            <DeleteType show={deleteTypeVisible} onHide={() => setDeleteTypeVisible(false)} />
         </Container>
     );
 };

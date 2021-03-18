@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 
 export default class DeviceStore {
     constructor() {
@@ -15,6 +15,9 @@ export default class DeviceStore {
 
     setTypes(types) {
         this._types = types
+    }
+    setDeleteType(id) {
+        this._types = this.types.filter(type => type.id != id)
     }
     setBrands(brands) {
         this._brands = brands

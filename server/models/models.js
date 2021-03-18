@@ -1,5 +1,7 @@
 const sequelize = require('../db')
-const {DataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize') // с помощью класса DataTypes описываются типы данных
+
+//Описываем модели данных
 
 const User = sequelize.define('user', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -49,6 +51,7 @@ const TypeBrand = sequelize.define('type_brand', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
+//Описание связи моделей
 
 User.hasOne(Basket)
 Basket.belongsTo(User)
@@ -76,6 +79,8 @@ DeviceInfo.belongsTo(Device)
 
 Type.belongsToMany(Brand, {through: TypeBrand })
 Brand.belongsToMany(Type, {through: TypeBrand })
+
+// Экспорт
 
 module.exports = {
     User,

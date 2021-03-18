@@ -13,7 +13,7 @@ const Auth = observer(() => {
     const {user} = useContext(Context)
     const location = useLocation()
     const history = useHistory()
-    const isLogin = location.pathname === LOGIN_ROUTE
+    const isLogin = location.pathname === LOGIN_ROUTE // ???
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -21,7 +21,7 @@ const Auth = observer(() => {
         try {
             let data;
             if (isLogin) {
-                data = await login(email, password);
+                data = await login(email, password); // Вызывваем login из userAPI с параметрами email, password
             } else {
                 data = await registration(email, password);
             }
