@@ -9,12 +9,12 @@ class TypeController {
     }
 
     async delete(req, res) {
+        const { id } = req.body
         const type = await Type.destroy({
-            where: {},
+            where: { id: id },
             truncate: false
         })
         return res.json(type)
-
     }
 
     async getAll(req, res) {
