@@ -11,14 +11,9 @@ const DeleteType = observer(({ show, onHide }) => {
     const { device } = useContext(Context)
     const [value, setValue] = useState('')
 
-    useEffect(() => {
-        fetchTypes().then(data => device.setTypes(data))
-    }, [])
-
     const deleteTypeClick = (id) => {
-        deleteType({ id: id }).then(data => {
-            onHide()
-        })
+        device.setDeleteTypes(id)
+        deleteType({ id: id })
     }
     return (
         <Modal

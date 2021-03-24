@@ -16,13 +16,18 @@ export default class DeviceStore {
     setTypes(types) {
         this._types = types
     }
+    setAddTypes(data) {
+        this._types = [...this.types, data]
+    }
+    setDeleteTypes(id) {
+        this._types = this.types.filter(item => item.id != id)
+    }
     setBrands(brands) {
         this._brands = brands
     }
     setDevices(devices) {
         this._devices = devices
     }
-
     setSelectedType(type) {
         this.setPage(1)
         this._selectedType = type

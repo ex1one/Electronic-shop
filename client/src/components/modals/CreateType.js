@@ -1,16 +1,21 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from "../../index";
 import Modal from "react-bootstrap/Modal";
-import {Form, Button} from "react-bootstrap";
-import {createType} from "../../http/deviceAPI";
+import { Form, Button } from "react-bootstrap";
+import { createType } from "../../http/deviceAPI";
 
-const CreateType = ({show, onHide}) => {
+const CreateType = ({ show, onHide }) => {
     const [value, setValue] = useState('')
+    const { device } = useContext(Context)
 
     const addType = () => {
-        createType({name: value}).then(data => { 
+        createType({ name: value }).then(data => {
             setValue('')
             onHide()
+            device.setAddTypes(data)
+            console.log(data);
         })
+
     }
 
     return (
