@@ -1,12 +1,12 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Modal from "react-bootstrap/Modal";
-import {Button, Dropdown, Form, Row, Col} from "react-bootstrap";
-import {Context} from "../../index";
-import {createDevice, fetchBrands, fetchDevices, fetchTypes} from "../../http/deviceAPI";
-import {observer} from "mobx-react-lite";
+import { Button, Dropdown, Form, Row, Col } from "react-bootstrap";
+import { Context } from "../../index";
+import { createDevice, fetchBrands, fetchDevices, fetchTypes } from "../../http/deviceAPI";
+import { observer } from "mobx-react-lite";
 
-const CreateDevice = observer(({show, onHide}) => {
-    const {device} = useContext(Context)
+const CreateDevice = observer(({ show, onHide }) => {
+    const { device } = useContext(Context)
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [file, setFile] = useState(null)
@@ -18,13 +18,13 @@ const CreateDevice = observer(({show, onHide}) => {
     }, [])
 
     const addInfo = () => {
-        setInfo([...info, {title: '', description: '', number: Date.now()}])
+        setInfo([...info, { title: '', description: '', number: Date.now() }])
     }
     const removeInfo = (number) => {
         setInfo(info.filter(i => i.number !== number))
     }
     const changeInfo = (key, value, number) => {
-        setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
+        setInfo(info.map(i => i.number === number ? { ...i, [key]: value } : i))
     }
 
     const selectFile = e => {
@@ -39,7 +39,9 @@ const CreateDevice = observer(({show, onHide}) => {
         formData.append('brandId', device.selectedBrand.id)
         formData.append('typeId', device.selectedType.id)
         formData.append('info', JSON.stringify(info))
-        createDevice(formData).then(data => onHide())
+        createDevice(formData).then(data => {
+            device.setAddDevices(data)
+        })
     }
 
     return (
@@ -99,7 +101,7 @@ const CreateDevice = observer(({show, onHide}) => {
                         type="file"
                         onChange={selectFile}
                     />
-                    <hr/>
+                    <hr />
                     <Button
                         variant={"outline-dark"}
                         onClick={addInfo}
