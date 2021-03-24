@@ -20,10 +20,16 @@ export default class DeviceStore {
         this._types = [...this.types, data]
     }
     setDeleteTypes(id) {
-        this._types = this.types.filter(item => item.id != id)
+        this._types = this.types.filter(item => item.id !== id)
     }
     setBrands(brands) {
         this._brands = brands
+    }
+    setAddBrands(data) {
+        this._brands = [...this.brands, data]
+    }
+    setDeleteBrands(id) {
+        this._brands = this.brands.filter(item => item.id !== id)
     }
     setDevices(devices) {
         this._devices = devices

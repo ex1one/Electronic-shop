@@ -5,14 +5,14 @@ import { Context } from "../../index";
 import ListGroup from "react-bootstrap/ListGroup";
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import { deleteType, fetchTypes } from "../../http/deviceAPI"
+import { deleteBrand, fetchTypes } from "../../http/deviceAPI"
 
-const DeleteType = observer(({ show, onHide }) => {
+const DeleteBrand = observer(({ show, onHide }) => {
     const { device } = useContext(Context)
 
-    const deleteTypeClick = (id) => {
-        device.setDeleteTypes(id)
-        deleteType({ id: id })
+    const deleteBrandClick = (id) => {
+        device.setDeleteBrands(id)
+        deleteBrand({ id: id })
     }
     return (
         <Modal
@@ -21,16 +21,16 @@ const DeleteType = observer(({ show, onHide }) => {
             centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Удалить тип
+                    Удалить бренд
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {device.types.map(type =>
+                {device.brands.map(brand =>
                     <ListGroup.Item
                         style={{ cursor: 'pointer' }}
-                        onClick={() => deleteTypeClick(type.id)}
-                        key={type.id}>
-                        {type.name}
+                        onClick={() => deleteBrandClick(brand.id)}
+                        key={brand.id}>
+                        {brand.name}
                     </ListGroup.Item>
                 )}
             </Modal.Body>
@@ -40,4 +40,4 @@ const DeleteType = observer(({ show, onHide }) => {
     );
 })
 
-export default DeleteType;
+export default DeleteBrand;

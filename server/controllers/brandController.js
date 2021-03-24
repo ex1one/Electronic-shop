@@ -1,11 +1,19 @@
-const {Brand} = require('../models/models')
+const { Brand } = require('../models/models')
 const ApiError = require('../error/ApiError');
 
 class BrandController {
     async create(req, res) {
-        const {name} = req.body
-        const brand = await Brand.create({name})
+        const { name } = req.body
+        const brand = await Brand.create({ name })
         return res.json(brand)
+    }
+
+    async delete(req, res) {
+        const { id } = req.body
+        const brand = await Brand.destroy({
+            where: { id: id },
+            truncate: false
+        })
     }
 
     async getAll(req, res) {

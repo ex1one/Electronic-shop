@@ -4,11 +4,13 @@ import CreateBrand from "../components/modals/CreateBrand";
 import CreateDevice from "../components/modals/CreateDevice";
 import CreateType from "../components/modals/CreateType";
 import DeleteType from "../components/modals/DeleteType";
+import DeleteBrand from "../components/modals/DeleteBrand";
 
 const Admin = () => {
     const [typeVisible, setTypeVisible] = useState(false)
     const [deleteTypeVisible, setDeleteTypeVisible] = useState(false)
     const [brandVisible, setBrandVisible] = useState(false)
+    const [deleteBrandVisible, setDeleteBrandVisible] = useState(false)
     const [deviceVisible, setDeviceVisible] = useState(false)
 
     return (
@@ -35,6 +37,13 @@ const Admin = () => {
             <Button
                 variant={"outline-dark"}
                 className="mt-4 p-2"
+                onClick={() => setDeleteBrandVisible(true)}
+            >
+                Удалить бренд
+            </Button>
+            <Button
+                variant={"outline-dark"}
+                className="mt-4 p-2"
                 onClick={() => setDeviceVisible(true)}
             >
                 Добавить устройство
@@ -43,6 +52,7 @@ const Admin = () => {
             <CreateDevice show={deviceVisible} onHide={() => setDeviceVisible(false)} />
             <CreateType show={typeVisible} onHide={() => setTypeVisible(false)} />
             <DeleteType show={deleteTypeVisible} onHide={() => setDeleteTypeVisible(false)} />
+            <DeleteBrand show={deleteBrandVisible} onHide={() => setDeleteBrandVisible(false)} />
         </Container>
     );
 };

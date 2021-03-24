@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Modal from "react-bootstrap/Modal";
 import { Button, Form } from "react-bootstrap";
 import { createBrand } from "../../http/deviceAPI";
+import { Context } from "../../index";
 
 const CreateBrand = ({ show, onHide }) => {
     const [value, setValue] = useState('')
+    const { device } = useContext(Context)
 
     const addBrand = () => {
         createBrand({ name: value }).then(data => {
             setValue('')
-            onHide()
+            device.setAddBrands(data)
         })
     }
     return (
@@ -20,7 +22,7 @@ const CreateBrand = ({ show, onHide }) => {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Добавить тип
+                    Добавить бренд
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
