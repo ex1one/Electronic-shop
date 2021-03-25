@@ -5,9 +5,17 @@ import { Context } from "../../index";
 import ListGroup from "react-bootstrap/ListGroup";
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import { deleteDevice, fetchTypes } from "../../http/deviceAPI"
+import { deleteDevice, fetchTypes, fetchDevices } from "../../http/deviceAPI"
 
 const DeleteDevice = observer(({ show, onHide }) => {
+
+    useEffect(() => {
+        fetchDevices().then(data => {
+            device.setDevices(data.rows)
+            device.setTotalCount(data.count)
+        })
+    }, [])
+
     const { device } = useContext(Context)
     const deleteDeviceClick = (id) => {
         device.setDeleteDevices(id)
@@ -20,7 +28,7 @@ const DeleteDevice = observer(({ show, onHide }) => {
             centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Удалить тип
+                    Удалить устройство
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -34,6 +42,9 @@ const DeleteDevice = observer(({ show, onHide }) => {
                 )}
             </Modal.Body>
             <Modal.Footer>
+                <Button variant="primary" onClick={() => console.log(toJS(device.devices))}>
+                    LOG
+                </Button>
             </Modal.Footer>
         </Modal >
     );

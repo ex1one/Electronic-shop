@@ -29,7 +29,7 @@ class DeviceController {
         }
 
     }
-
+    
     async delete(req, next) {
         try {
             const { id } = req.body

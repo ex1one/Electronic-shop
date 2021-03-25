@@ -1,3 +1,4 @@
+import { toJS } from 'mobx';
 import { makeAutoObservable } from "mobx";
 
 export default class DeviceStore {
@@ -10,6 +11,7 @@ export default class DeviceStore {
         this._page = 1
         this._totalCount = 0
         this._limit = 3
+        this._cartItems = []
         makeAutoObservable(this)
     }
 
@@ -53,6 +55,9 @@ export default class DeviceStore {
     }
     setTotalCount(count) {
         this._totalCount = count
+    }
+    setCartItem(item) {
+        this._cartItems += item;
     }
 
     get types() {
