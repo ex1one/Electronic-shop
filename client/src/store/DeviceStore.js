@@ -11,7 +11,8 @@ export default class DeviceStore {
         this._page = 1
         this._totalCount = 0
         this._limit = 3
-        this._cartItems = []
+        this._basketItems = []
+        // this._basketItemsLength = 0
         makeAutoObservable(this)
     }
 
@@ -56,8 +57,24 @@ export default class DeviceStore {
     setTotalCount(count) {
         this._totalCount = count
     }
-    setCartItem(item) {
-        this._cartItems += item;
+    setBasketItems(item) {
+        if (this.basketItems.some(e => e.name === item.name)) {
+            alert('товар уже добавлен в корзину');
+        }
+        else {
+            this._basketItems = [...this.basketItems, item];
+        }
+    }
+    setbasketItemsCounter(id) {
+        return this.basketItems.filter(item => item.id === id).length
+    }
+    setBasketPlusItem(item) {
+        this._basketItems = [...this.basketItems, item]
+        this.setbasketItemsCounter(item.id)
+    }
+    setBasketMinusItem(id) {
+        this.basketItems.splice(this.basketItems.findIndex(item => item.id === id), 1)
+        this.setbasketItemsCounter(id)
     }
 
     get types() {
@@ -84,4 +101,11 @@ export default class DeviceStore {
     get limit() {
         return this._limit
     }
+    get basketItems() {
+        return this._basketItems
+    }
+    get counter() {
+        return this._basketItemsLength
+    }
+
 }
