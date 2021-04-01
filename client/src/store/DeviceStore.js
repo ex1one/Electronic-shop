@@ -1,4 +1,4 @@
-import { toJS } from 'mobx';
+import { observable, toJS } from 'mobx';
 import { makeAutoObservable } from "mobx";
 
 export default class DeviceStore {
@@ -65,17 +65,16 @@ export default class DeviceStore {
             this._basketItems = [...this.basketItems, item];
         }
     }
-    setbasketItemsCounter(id) {
-        return this.basketItems.filter(item => item.id === id).length
-    }
     setBasketPlusItem(item) {
         this._basketItems = [...this.basketItems, item]
-        this.setbasketItemsCounter(item.id)
     }
     setBasketMinusItem(id) {
         this.basketItems.splice(this.basketItems.findIndex(item => item.id === id), 1)
-        this.setbasketItemsCounter(id)
     }
+    setBasketDeleteAll() {
+        this._basketItems = []
+    }
+
 
     get types() {
         return this._types

@@ -23,10 +23,11 @@ const BasketItem = observer(({ basketItem }) => {
             </Col>
             <Col>
                 <div className="d-flex ">
-                    <Button variant="primary" size="sm" onClick={() => device.setBasketPlusItem(basketItem)}>Добавить</Button>
+                    <Button variant="primary" size="sm" onClick={() => device.setBasketPlusItem(basketItem)}>+</Button>
                     <h1>{itemCounter()}</h1>
-                    <Button variant="primary" size="sm" onClick={() => device.setBasketMinusItem(basketItem.id)}>Удалить</Button>
+                    <Button variant="primary" size="sm" onClick={() => device.setBasketMinusItem(basketItem.id)}>-</Button>
                     <h1>{basketItem.price * itemCounter()}</h1>
+                    <Button variant="primary" size="sm">Удалить</Button>
                 </div>
             </Col>
         </Row>

@@ -13,7 +13,7 @@ const Basket = observer(() => {
             <div>
                 <Row>
                     <Col>
-                        Очистить корзину
+                        <Button variant="primary" size="sm" onClick={() => device.setBasketDeleteAll()}>Очистить корзину</Button>
                     </Col>
                     <Col>
                         Товар
